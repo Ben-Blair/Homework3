@@ -1,0 +1,9 @@
+This program allows you to search through the
+data from the Social Security Administration
+to see how popular a particular name has been
+since 1863.
+
+Name: michelle
+Gender (M or F): f
+Michelle   f 0 0 0  0  0 728 174  39
+MICHELLE f French, English French feminine form of MICHAEL

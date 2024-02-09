@@ -1,0 +1,221 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+plugins {
+    id 'java'
+    id 'eclipse'    // Apply the 'eclipse' plugin so we can generate Eclipse project files
+    id 'idea'       // Apply the 'idea' plugin so we can generate IntelliJ project files
+    id 'checkstyle' // Apply the 'checkstyle' plugin so we can check our code style
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+
+// This project uses a few 3rd party libraries. Rather then downloading
+// and installing them manually, which can be highly error-prone, we
+// have Gradle do it for us. In the "repositories" section, we specify
+// where we want to search for these 3rd party packages.
+repositories {
+    // Maven central is a website containing a large collection of
+    // 3rd party libraries. It was originally meant to be used with the
+    // Maven build tool, but it's so comprehensive other build tools decided
+    // to just use this one instead of building a similar website.
+    //
+    // mavenLocal() refers a folder in your computer that contains any
+    // libraries you may have already pre-downloaded; mavenCentral refers to
+    // the actual website.
+    mavenLocal()
+    mavenCentral()
+}
+
+// Here, we list all the different libraries we plan on using.
+// Gradle will automatically download them from the repositories listed above.
+dependencies {
+//    assert project.hasProperty("checkstyleVersion")
+//
+//    checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.junit-pioneer:junit-pioneer:2.0.0'
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.8.1')
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events TestLogEvent.FAILED,
+                TestLogEvent.SKIPPED,
+                TestLogEvent.STANDARD_ERROR,
+                TestLogEvent.STANDARD_OUT
+        exceptionFormat TestExceptionFormat.FULL
+        showCauses true
+        showExceptions true
+        showStackTraces true
+        showStandardStreams true
+    }
+}
+
+sourceSets.main.java.srcDirs = ['src']
+sourceSets.test.java.srcDirs = ['tst']
+
+task testGraphicComparisonNamesAbbieF(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNamesAbbieF"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonNamesDonM(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNamesDonM"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonNamesEthelF(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNamesEthelF"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonNamesMichelleF(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNamesMichelleF"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonNamesStuartM(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNamesStuartM"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonNames2AbbieF(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNames2AbbieF"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonNames2DonM(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNames2DonM"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonNames2EthelF(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNames2EthelF"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonNames2MichelleF(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNames2MichelleF"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonNames2StuartM(type: Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "GraphicsFunctionalityTestNames2StuartM"
+        }
+    }
+
+    dependsOn test
+    mustRunAfter test
+}
+
+task testGraphicComparisonFinal(type: Test) {
+    useJUnitPlatform {
+        includeTags 'GraphicalFunctionalityFinal'
+    }
+
+    group = 'verification'
+    dependsOn tasks.findByName('testGraphicComparisonNamesAbbieF')
+    dependsOn tasks.findByName('testGraphicComparisonNamesDonM')
+    dependsOn tasks.findByName('testGraphicComparisonNamesEthelF')
+    dependsOn tasks.findByName('testGraphicComparisonNamesMichelleF')
+    dependsOn tasks.findByName('testGraphicComparisonNamesStuartM')
+    dependsOn tasks.findByName('testGraphicComparisonNames2AbbieF')
+    dependsOn tasks.findByName('testGraphicComparisonNames2DonM')
+    dependsOn tasks.findByName('testGraphicComparisonNames2EthelF')
+    dependsOn tasks.findByName('testGraphicComparisonNames2MichelleF')
+    dependsOn tasks.findByName('testGraphicComparisonNames2StuartM')
+    mustRunAfter tasks.findByName('testGraphicComparisonNamesAbbieF')
+    mustRunAfter tasks.findByName('testGraphicComparisonNamesDonM')
+    mustRunAfter tasks.findByName('testGraphicComparisonNamesEthelF')
+    mustRunAfter tasks.findByName('testGraphicComparisonNamesMichelleF')
+    mustRunAfter tasks.findByName('testGraphicComparisonNamesStuartM')
+    mustRunAfter tasks.findByName('testGraphicComparisonNames2AbbieF')
+    mustRunAfter tasks.findByName('testGraphicComparisonNames2DonM')
+    mustRunAfter tasks.findByName('testGraphicComparisonNames2EthelF')
+    mustRunAfter tasks.findByName('testGraphicComparisonNames2MichelleF')
+    mustRunAfter tasks.findByName('testGraphicComparisonNames2StuartM')
+}
+
+test {
+    useJUnitPlatform {
+        excludeTags 'GraphicalFunctionality | GraphicalFunctionalityFinal'
+    }
+}
+
+checkstyle {
+    toolVersion '10.12.3'
+    configFile file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+    ignoreFailures = true;
+}
+
+checkstyleMain {
+    enabled = true
+    source ='src'   // changed from default of 'src/main'
+    ignoreFailures = true   // Set ignoreFailures to true to ignore checkstyle errors and continue build
+
+    exclude '*DrawingPanel.java'
+}
+
+checkstyleTest {
+    enabled = false
+    source ='tst'
+    ignoreFailures = true;
+}
