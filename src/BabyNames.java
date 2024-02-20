@@ -25,7 +25,7 @@ public class BabyNames {
 
     // class variable for name file (Change the assigned value only. Do NOT change the type or the variable name)
     // Test with both "names.txt" and "names2.txt" (Before submission, change back to "names.txt")
-    private static String nameFilename = "names.txt";
+    private static String nameFilename = "names2.txt";
 
     // Other class variables (Change the assigned value only. Do NOT change any of the variable types or names.)
     private static int startingYear = 1890;
